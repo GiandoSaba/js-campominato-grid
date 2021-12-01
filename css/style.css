@@ -69,6 +69,10 @@ main {
     font-size: 1.5em;
 }
 
+.square:hover {
+    cursor: pointer;
+}
+
 .square.clicked {
     background-color: #6495ED;
     color: white;
