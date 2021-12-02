@@ -7,11 +7,16 @@
 // Quando l’utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 
 const playButton = document.getElementById('play-button');
+const select = document.getElementById('difficulty-select');
 const grid = document.getElementById('grid');
+let width = `calc(100% / 10)`;
+let height = `calc(100% / 10)`;
+let numberSquare = 100;
 
-playButton.addEventListener('click', function () {
-    grid.innerHTML = '';
-    const selectValue = document.getElementById('difficulty-select').value;
+
+
+select.addEventListener('change', function () {
+    const selectValue = select.value;
     let row = 0;
     let col = 0;
     switch (selectValue) {
@@ -28,26 +33,34 @@ playButton.addEventListener('click', function () {
             col = 7;
             break;
     }
-
-    const numberSquare = row * col;
+    
+    width = `calc(100% / ${col})`;
+    height = `calc(100% / ${row})`;
+    numberSquare = col * row;    
+});
+            
+                   
+            
+            
+playButton.addEventListener('click', function () {
+    let point = 0;
+    grid.innerHTML = '';
 
     for (let i = 0; i < numberSquare; i++) {
         const square = document.createElement('div');
         square.classList.add('square');
-        const width = `calc(100% / ${col})`;
-        const height = `calc(100% / ${row})`;
         square.append(i+1);
         square.style.width = width;
         square.style.height = height;
         grid.append(square);
         
-
         square.addEventListener('click', function() {
-            this.classList.add('clicked');
-        });
-
-
-        
+            if (!this.classList.contains('clicked')) {
+                this.classList.add('clicked');
+                point += 1;
+                console.log(point);
+            }
+        }); 
     }
 
 });
